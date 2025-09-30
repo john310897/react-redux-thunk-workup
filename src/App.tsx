@@ -1,24 +1,23 @@
-import './App.css';
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { getUserData } from './reducers';
+import { useEffect } from "react"
+import { getUserData } from "./reducers"
+import { useSelector, useDispatch } from "react-redux"
 
-function App() {
-  const dispatch = useDispatch();
-  const userData = useSelector((data: any) => data?.data);
+const App = () => {
+  const dispatch: any = useDispatch();
+  const userStore = useSelector(data => data)
+
   useEffect(() => {
-    console.log('in loading use effect app.js file', userData);
-    dispatch(getUserData());
-  }, [dispatch]);
+    console.log(userStore)
+    dispatch(getUserData())
+  }, [])
 
-  const getUpdatedStateData = () => {
-    console.log(userData);
-  };
+  const handleButtonClick = () => {
+    console.log(userStore)
+  }
   return (
     <>
-      <button onClick={getUpdatedStateData}>get updated state data</button>
+      <button onClick={handleButtonClick}>get updated state</button>
     </>
-  );
+  )
 }
-
-export default App;
+export default App
