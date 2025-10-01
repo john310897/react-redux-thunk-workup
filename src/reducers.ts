@@ -1,28 +1,30 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 type StateType = {
-  data: any;
-  status: 'IDEL' | 'PENDING' | 'SUCCESS' | 'FAILURE'
+  status: 'IDLE' | 'SUCCESS' | 'FAILURE' | 'PENDING'
+  data: any
 }
 const initialState: StateType = {
-  data: {},
-  status: "IDEL"
+  status: 'IDLE',
+  data: {}
 }
+
 const fetchData = () => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      reject(new Error('None'))
+      reject({
+        name: 'john',
+        place: 'abc'
+      })
     }, 1000)
   })
 }
 
 export const getUserData = createAsyncThunk('getUserData/data', async () => {
   try {
-    const response = await fetchData()
+    const response = await fetchData();
     return response
-  }
-  catch (err) {
-    // console.error(err)
+  } catch (err) {
     throw err
   }
 })
@@ -31,20 +33,19 @@ const dataReducer = createSlice({
   name: 'data',
   initialState: initialState,
   reducers: {},
-  extraReducers(builder) {
+  extraReducers: (builder) => {
     builder
       .addCase(getUserData.pending, (state) => {
         state.status = "PENDING"
       })
       .addCase(getUserData.fulfilled, (state, action) => {
-        state.status = "SUCCESS"
+        state.status = 'SUCCESS'
         state.data = action.payload
       })
       .addCase(getUserData.rejected, (state) => {
-        console.log("in reject")
-        state.status = "FAILURE"
+        state.status = 'FAILURE'
       })
-  },
+  }
 })
 
 export default dataReducer.reducer
