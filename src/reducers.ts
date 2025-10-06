@@ -12,7 +12,7 @@ const initialState: StateType = {
 const fetchData = () => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-      reject({
+      resolve({
         name: 'john',
         place: 'abc'
       })
