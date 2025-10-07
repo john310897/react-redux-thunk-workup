@@ -1,51 +1,88 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-
-type StateType = {
-  status: 'IDLE' | 'SUCCESS' | 'FAILURE' | 'PENDING'
-  data: any
-}
-const initialState: StateType = {
-  status: 'IDLE',
-  data: {}
-}
+import { initialState, apiStatus, type ReturnType, type EmployeeType } from "./constants";
+import ApiServices from "./apiService";
 
 const fetchData = () => {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve({
-        name: 'john',
-        place: 'abc'
-      })
-    }, 1000)
-  })
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            const returnData: ReturnType = {
+                name: 'abc',
+                city: 'def',
+                mobile: 9999999999,
+                place: 'ewe'
+            }
+            resolve(returnData)
+        }, 5000)
+    })
 }
 
-export const getUserData = createAsyncThunk('getUserData/data', async () => {
-  try {
-    const response = await fetchData();
-    return response
-  } catch (err) {
-    throw err
-  }
+const fetchEmployeeList = () => {
+    return ApiServices.getEmployeeList()
+}
+
+export const employeeList = createAsyncThunk('employeeList/data', async () => {
+    try {
+        const response = await fetchEmployeeList()
+        return response
+    }
+    catch (err) {
+        throw err
+    }
+})
+
+
+export const userData = createAsyncThunk('userData/data', async () => {
+    try {
+        const response = await fetchData();
+        return response
+    } catch (err) {
+        throw (err)
+    }
 })
 
 const dataReducer = createSlice({
-  name: 'data',
-  initialState: initialState,
-  reducers: {},
-  extraReducers: (builder) => {
-    builder
-      .addCase(getUserData.pending, (state) => {
-        state.status = "PENDING"
-      })
-      .addCase(getUserData.fulfilled, (state, action) => {
-        state.status = 'SUCCESS'
-        state.data = action.payload
-      })
-      .addCase(getUserData.rejected, (state) => {
-        state.status = 'FAILURE'
-      })
-  }
+    name: 'data',
+    initialState: initialState,
+    reducers: {
+        updateState(state, action) {
+            return { ...state, ...action.payload }
+        },
+        removeKeyFromState(state, action) {
+            let tempStateObj: any = state;
+            delete tempStateObj[action?.payload]
+            return tempStateObj;
+        },
+        resetState() {
+            return initialState
+        }
+    },
+    extraReducers(builder) {
+        builder
+            .addCase(userData.pending, (state) => {
+                state.status = apiStatus.pending
+                state.data = {}
+                console.log('in pending state...')
+            })
+            .addCase(userData.fulfilled, (state, action) => {
+                state.status = apiStatus.success
+                state.data = action?.payload
+            })
+            .addCase(userData.rejected, (state) => {
+                state.status = apiStatus.failure
+                state.data = {}
+            })
+            .addCase(employeeList.pending, (state) => {
+                state.employeeListStatus = apiStatus.pending
+            })
+            .addCase(employeeList.fulfilled, (state, action) => {
+                state.employeeListStatus = apiStatus.success
+                state.employeeList = action.payload
+            })
+            .addCase(employeeList.rejected, (state) => {
+                state.employeeListStatus = apiStatus.failure
+                state.employeeList = {}
+            })
+    },
 })
-
+export const { updateState, removeKeyFromState, resetState } = dataReducer.actions
 export default dataReducer.reducer
