@@ -89,9 +89,13 @@ button {
 .main_dispatch_status {
   width: 30%;
   align-items: center;
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
 }
 
-.main_dispatch_status p {
-  align-items: center;
+.main_dispatch_status {
+  text-align: center;
   width: 100%;
+  height: inherit;
 }

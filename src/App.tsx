@@ -1,5 +1,5 @@
 import { useEffect } from "react"
-import { getUserData } from "./reducers"
+import { userData } from "./reducers"
 import { useSelector, useDispatch } from "react-redux"
 
 const App = () => {
@@ -18,7 +18,7 @@ const App = () => {
 
 	const handleButtonClick = () => {
 		console.log(userStore)
-		dispatch(getUserData())
+		dispatch(userData())
 	}
 	return (
 		<>
