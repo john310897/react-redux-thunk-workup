@@ -1,16 +1,13 @@
-import { useEffect } from "react"
+import React, { useEffect } from "react"
 import { userData } from "./reducers"
+import './App.css'
 import { useSelector, useDispatch } from "react-redux"
+import { tableData, tableHeader } from "./constants"
+import TableComponent from "./components/TableComponent"
 
 const App = () => {
 	const dispatch: any = useDispatch();
 	const userStore: any = useSelector(data => data)
-	const statusColor: any = {
-		'PENDING': 'orange',
-		'IDLE': 'red',
-		'SUCCESS': 'green'
-	}
-
 	useEffect(() => {
 		console.log(userStore)
 
@@ -20,17 +17,19 @@ const App = () => {
 		console.log(userStore)
 		dispatch(userData())
 	}
+
 	return (
-		<>
+		<React.Fragment>
 			<div className="main_container">
-				<div className="main_dispatch_control">
-					<button onClick={handleButtonClick}>update dispatch status</button>
-				</div>
-				<div className="main_dispatch_status" style={{ 'background': statusColor[userStore?.data?.status] }}>
-					<p>{userStore?.data?.status}</p>
-				</div>
+				<TableComponent
+					headers={tableHeader}
+					data={tableData}
+					handleOnClick={handleButtonClick}
+					apiStatus={userStore?.data?.status}
+				/>
 			</div>
-		</>
+
+		</React.Fragment>
 	)
 }
 export default App

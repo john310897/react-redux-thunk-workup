@@ -30,7 +30,6 @@ export const employeeList = createAsyncThunk('employeeList/data', async () => {
     }
 })
 
-
 export const userData = createAsyncThunk('userData/data', async () => {
     try {
         const response = await fetchData();
@@ -66,21 +65,26 @@ const dataReducer = createSlice({
             .addCase(userData.fulfilled, (state, action) => {
                 state.status = apiStatus.success
                 state.data = action?.payload
+                console.log("in success state...", action?.payload)
             })
             .addCase(userData.rejected, (state) => {
                 state.status = apiStatus.failure
                 state.data = {}
+                console.log("in failure state...")
             })
             .addCase(employeeList.pending, (state) => {
                 state.employeeListStatus = apiStatus.pending
+                console.log("in pending state...")
             })
             .addCase(employeeList.fulfilled, (state, action) => {
                 state.employeeListStatus = apiStatus.success
                 state.employeeList = action.payload
+                console.log("in success state...", action?.payload)
             })
             .addCase(employeeList.rejected, (state) => {
                 state.employeeListStatus = apiStatus.failure
                 state.employeeList = {}
+                console.log("in failure state...")
             })
     },
 })

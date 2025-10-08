@@ -77,7 +77,6 @@ button:focus-visible {
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  background-color: #213547;
   width: 70vh;
   height: 20vh;
 }
@@ -98,4 +97,14 @@ button {
   text-align: center;
   width: 100%;
   height: inherit;
+}
+
+.main_container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+button {
+  background-color: #213547;
 }

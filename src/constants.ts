@@ -27,6 +27,33 @@ export type EmployeeType = {
     profile_image: string
 }
 
+export type TableComponentPropType = {
+    headers: any[],
+    data: any,
+    apiStatus: string,
+    handleOnClick: () => void
+}
+
+export const statusColors: any = {
+    PENDING: 'orange',
+    IDLE: 'grey',
+    SUCCESS: 'green',
+    FAILURE: 'red'
+}
+
+export const tableHeader = [
+    { label: 'action', key: 'action' },
+    { label: 'result', key: 'result' },
+    { label: 'status', key: 'status' },
+    { label: 'control', key: 'control' },
+    { label: 'progress status', key: 'progress_status' }
+]
+
+export const tableData = [
+    { action: 'check api status', result: true, status: true, progress_status: true },
+    { action: 'check get employee status', result: true, status: true, progress_status: true },
+    { action: 'check get employee data status', result: true, status: true, progress_status: true },
+]
 
 export const apiStatus: ApiStatus = {
     idle: 'IDLE',
