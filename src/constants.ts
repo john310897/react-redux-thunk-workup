@@ -31,7 +31,7 @@ export type TableComponentPropType = {
     headers: any[],
     data: any,
     apiStatus: string,
-    handleOnClick: () => void
+    handleOnClick: (key: string) => void
 }
 
 export const statusColors: any = {
@@ -43,14 +43,14 @@ export const statusColors: any = {
 
 export const tableHeader = [
     { label: 'action', key: 'action' },
-    { label: 'result', key: 'result' },
+    { label: 'Result from API', key: 'result' },
     { label: 'status', key: 'status' },
-    { label: 'control', key: 'control' },
-    { label: 'progress status', key: 'progress_status' }
+    { label: 'Action Control', key: 'control' },
+    { label: 'Progress Status', key: 'progress_status' }
 ]
 
 export const tableData = [
-    { action: 'check api status', result: true, status: true, progress_status: true },
+    { action: 'check api status', result: true, status: true, progress_status: true, actionKey: 'initApi' },
     { action: 'check get employee status', result: true, status: true, progress_status: true },
     { action: 'check get employee data status', result: true, status: true, progress_status: true },
 ]

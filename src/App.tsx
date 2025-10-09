@@ -13,9 +13,17 @@ const App = () => {
 
 	}, [])
 
-	const handleButtonClick = () => {
-		console.log(userStore)
-		dispatch(userData())
+	const handleButtonClick = (actionType: string) => {
+		console.log(actionType)
+		switch (actionType) {
+			case ('action'):
+				console.log('in action key')
+				break;
+			default:
+				break;
+		}
+		// console.log(userStore)
+		// dispatch(userData())
 	}
 
 	return (
@@ -24,7 +32,7 @@ const App = () => {
 				<TableComponent
 					headers={tableHeader}
 					data={tableData}
-					handleOnClick={handleButtonClick}
+					handleOnClick={(key) => handleButtonClick(key)}
 					apiStatus={userStore?.data?.status}
 				/>
 			</div>

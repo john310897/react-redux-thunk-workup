@@ -81,9 +81,6 @@ button:focus-visible {
   height: 20vh;
 }
 
-button {
-  height: 18vh;
-}
 
 .main_dispatch_status {
   width: 30%;
@@ -107,4 +104,22 @@ button {
 
 button {
   background-color: #213547;
+  border: 1px solid;
+  font-variant: small-caps;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+tr:nth-child(even) {
+  background-color: dimgray;
+}
+
+th,
+td {
+  padding: 10px;
+  border: 1px solid;
 }

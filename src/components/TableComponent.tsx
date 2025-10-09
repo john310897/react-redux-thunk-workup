@@ -6,10 +6,9 @@ const TableComponent = ({ headers, data, handleOnClick, apiStatus }: TableCompon
         <>
             <table border={1}>
                 <tbody>
-
                     <tr>
                         {headers?.map((headerData, index) => (
-                            <th className="table_header" key={index}>
+                            <th key={index}>
                                 {headerData?.label}
                             </th>
                         ))}
@@ -20,7 +19,7 @@ const TableComponent = ({ headers, data, handleOnClick, apiStatus }: TableCompon
                                 <React.Fragment>
                                     {headerObj?.key === 'control' ? (
                                         <td>
-                                            <button onClick={handleOnClick} style={{ 'background': statusColors[apiStatus] }}>
+                                            <button onClick={() => handleOnClick(rowData?.actionKey)} style={{ 'background': statusColors[apiStatus] }}>
                                                 perform action
                                             </button>
                                         </td>
