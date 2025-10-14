@@ -23,9 +23,20 @@ const TableComponent = ({ headers, data, handleOnClick, apiStatus }: TableCompon
                                                 perform action
                                             </button>
                                         </td>
-                                    ) : (
-                                        <td>{rowData[headerObj?.key]}</td>
-                                    )}
+                                    ) : headerObj?.key === 'status' ? (
+                                        <td style={{ backgroundColor: (rowData[headerObj?.key] === true ? 'lightgreen' : 'initial') }}>
+                                            {rowData[headerObj?.key] === true &&
+                                                <>
+
+                                                    &#x2713;
+                                                </>
+
+                                            }
+                                        </td>
+                                    ) :
+                                        (
+                                            <td>{rowData[headerObj?.key]}</td>
+                                        )}
                                 </React.Fragment>
                             ))}
                         </tr>

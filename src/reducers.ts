@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { initialState, apiStatus, type ReturnType, type EmployeeType } from "./constants";
+import { initialState, apiStatus, type ReturnType, type EmployeeType, tableData } from "./constants";
 import ApiServices from "./apiService";
 
 const fetchData = () => {
@@ -65,6 +65,9 @@ const dataReducer = createSlice({
             .addCase(userData.fulfilled, (state, action) => {
                 state.status = apiStatus.success
                 state.data = action?.payload
+                tableData[0].result = JSON.stringify(action?.payload)
+                tableData[0].status = true
+                tableData[0].progress_status = apiStatus?.success
                 console.log("in success state...", action?.payload)
             })
             .addCase(userData.rejected, (state) => {

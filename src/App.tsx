@@ -34,7 +34,10 @@ const App = () => {
 	const checkInitialDispatch = () => {
 		console.log("in checking initial dispatch status")
 		dispatch(userData())
-		console.log(userStore)
+		setTimeout(() => {
+			console.log(userStore)
+		}, 3000)
+
 	}
 
 	return (

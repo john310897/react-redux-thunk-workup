@@ -69,25 +69,25 @@ export const tableHeader = [
 export const tableData = [
     {
         action: 'check initial dispatch status',
-        result: true,
-        status: true,
-        progress_status: true,
+        result: "",
+        status: false,
+        progress_status: "",
         actionKey: 'initDispatch',
         actionKeyStatus: apiStatus.idle
     },
     {
         action: 'check get all employee status',
         result: true,
-        status: true,
-        progress_status: true,
+        status: false,
+        progress_status: "",
         actionKey: 'allEmployeeStatus',
         actionKeyStatus: apiStatus.idle
     },
     {
         action: 'check get employee data status',
         result: true,
-        status: true,
-        progress_status: true,
+        status: false,
+        progress_status: "",
         actionKey: 'employeeData',
         actionKeyStatus: apiStatus.idle
     },
