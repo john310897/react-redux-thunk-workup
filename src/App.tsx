@@ -14,16 +14,27 @@ const App = () => {
 	}, [])
 
 	const handleButtonClick = (actionType: string) => {
-		console.log(actionType)
 		switch (actionType) {
-			case ('action'):
-				console.log('in action key')
-				break;
+			case ('initDispatch'):
+				console.log("in initDispatch###")
+				checkInitialDispatch()
+				break
+			case ('allEmployeeStatus'):
+				console.log("in checking get all employee status###")
+				break
+			case ('employeeData'):
+				console.log("in getting employee data")
+				break
 			default:
-				break;
+				console.info("no matching action found")
+				break
 		}
-		// console.log(userStore)
-		// dispatch(userData())
+	}
+
+	const checkInitialDispatch = () => {
+		console.log("in checking initial dispatch status")
+		dispatch(userData())
+		console.log(userStore)
 	}
 
 	return (
@@ -36,7 +47,6 @@ const App = () => {
 					apiStatus={userStore?.data?.status}
 				/>
 			</div>
-
 		</React.Fragment>
 	)
 }

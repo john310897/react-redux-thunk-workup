@@ -16,18 +16,17 @@ const TableComponent = ({ headers, data, handleOnClick, apiStatus }: TableCompon
                     {data?.map((rowData: any, index: number) => (
                         <tr key={index}>
                             {headers?.map((headerObj, index) => (
-                                <React.Fragment>
+                                <React.Fragment key={index}>
                                     {headerObj?.key === 'control' ? (
                                         <td>
-                                            <button onClick={() => handleOnClick(rowData?.actionKey)} style={{ 'background': statusColors[apiStatus] }}>
+                                            <button onClick={() => handleOnClick(rowData?.actionKey)} >
                                                 perform action
                                             </button>
                                         </td>
                                     ) : (
-                                        <td>({rowData[headerObj?.key]})</td>
+                                        <td>{rowData[headerObj?.key]}</td>
                                     )}
                                 </React.Fragment>
-
                             ))}
                         </tr>
                     ))}

@@ -1,15 +1,32 @@
-type ApiStatus = {
-    idle: 'IDLE',
+export const apiStatus: ApiStatus = {
+    idle: "IDLE",
     pending: 'PENDING',
     success: 'SUCCESS',
     failure: 'FAILURE'
 }
 
+// status type declarations
+export type IDLE = 'IDLE'
+export type PENDING = 'PENDING'
+export type SUCCESS = 'SUCCESS'
+export type FAILURE = 'FAILURE'
+
+export type MUL_STATUS = IDLE | PENDING | SUCCESS | FAILURE
+
+type ApiStatus = {
+    idle: IDLE,
+    pending: PENDING,
+    success: SUCCESS,
+    failure: FAILURE
+}
+
 type StateType = {
     data: any,
-    status: 'IDLE' | 'PENDING' | 'SUCCESS' | 'FAILURE',
+    status: MUL_STATUS,
     employeeList?: any,
-    employeeListStatus?: 'IDLE' | 'PENDING' | 'SUCCESS' | 'FAILURE'
+    employeeListStatus?: MUL_STATUS,
+    employeeData?: any,
+    employeeDataStatus?: MUL_STATUS
 }
 
 export type ReturnType = {
@@ -50,22 +67,37 @@ export const tableHeader = [
 ]
 
 export const tableData = [
-    { action: 'check api status', result: true, status: true, progress_status: true, actionKey: 'initApi' },
-    { action: 'check get employee status', result: true, status: true, progress_status: true },
-    { action: 'check get employee data status', result: true, status: true, progress_status: true },
+    {
+        action: 'check initial dispatch status',
+        result: true,
+        status: true,
+        progress_status: true,
+        actionKey: 'initDispatch',
+        actionKeyStatus: apiStatus.idle
+    },
+    {
+        action: 'check get all employee status',
+        result: true,
+        status: true,
+        progress_status: true,
+        actionKey: 'allEmployeeStatus',
+        actionKeyStatus: apiStatus.idle
+    },
+    {
+        action: 'check get employee data status',
+        result: true,
+        status: true,
+        progress_status: true,
+        actionKey: 'employeeData',
+        actionKeyStatus: apiStatus.idle
+    },
 ]
-
-export const apiStatus: ApiStatus = {
-    idle: 'IDLE',
-    pending: 'PENDING',
-    success: 'SUCCESS',
-    failure: 'FAILURE'
-}
-
 
 export const initialState: StateType = {
     data: {},
     status: apiStatus.idle,
     employeeList: {},
-    employeeListStatus: apiStatus.idle
+    employeeListStatus: apiStatus.idle,
+    employeeData: {},
+    employeeDataStatus: apiStatus.idle
 }
