@@ -51,6 +51,13 @@ export type TableComponentPropType = {
     handleOnClick: (key: string) => void
 }
 
+
+export const UNICODE_SYMBOLS: any = {
+    IDLE: '',
+    PENDING: '\u23F3',
+    SUCCESS: '\u2714',
+    FAILURE: '\u274C'
+}
 export const statusColors: any = {
     PENDING: 'orange',
     IDLE: 'grey',

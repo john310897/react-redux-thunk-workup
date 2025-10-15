@@ -1,7 +1,12 @@
 import React from "react"
-import { statusColors, type TableComponentPropType } from "../constants"
+import { UNICODE_SYMBOLS, statusColors, type TableComponentPropType } from "../constants"
 
 const TableComponent = ({ headers, data, handleOnClick }: TableComponentPropType) => {
+
+    const tableCellBackground = (rowData: any, headerObj: any) => {
+        if (headerObj?.key === 'status' || headerObj?.key === 'progress_status')
+            return { style: { backgroundColor: statusColors[rowData['progress_status']] } }
+    }
 
     return (
         <>
@@ -25,16 +30,16 @@ const TableComponent = ({ headers, data, handleOnClick }: TableComponentPropType
                                             </button>
                                         </td>
                                     ) : headerObj?.key === 'status' ? (
-                                        <td style={{ backgroundColor: (statusColors[rowData['progress_status']]) }}>
-                                            {rowData[headerObj?.key] === true &&
-                                                <>
-                                                    &#x2713;
-                                                </>
-                                            }
+                                        <td {...tableCellBackground(rowData, headerObj)}>
+                                            <>
+                                                {console.log(rowData?.progress_status)}
+                                                {UNICODE_SYMBOLS[rowData?.progress_status]}
+                                            </>
+
                                         </td>
                                     ) :
                                         (
-                                            <td>
+                                            <td {...tableCellBackground(rowData, headerObj)}>
                                                 <div>
                                                     {rowData[headerObj?.key]}
                                                 </div>
