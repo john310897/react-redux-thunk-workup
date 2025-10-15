@@ -123,3 +123,9 @@ td {
   padding: 10px;
   border: 1px solid;
 }
+
+td div {
+  max-height: 20vh;
+  max-width: 483px;
+  overflow: auto;
+}

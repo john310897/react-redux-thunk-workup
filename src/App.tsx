@@ -1,5 +1,5 @@
 import React, { useEffect } from "react"
-import { userData } from "./reducers"
+import { employeeList, userData } from "./reducers"
 import './App.css'
 import { useSelector, useDispatch } from "react-redux"
 import { tableData, tableHeader } from "./constants"
@@ -21,6 +21,7 @@ const App = () => {
 				break
 			case ('allEmployeeStatus'):
 				console.log("in checking get all employee status###")
+				checkAllEmployeeListDispatch()
 				break
 			case ('employeeData'):
 				console.log("in getting employee data")
@@ -38,6 +39,11 @@ const App = () => {
 			console.log(userStore)
 		}, 3000)
 
+	}
+
+	const checkAllEmployeeListDispatch = () => {
+		console.log("in dispatch action: getting all employee list")
+		dispatch(employeeList())
 	}
 
 	return (

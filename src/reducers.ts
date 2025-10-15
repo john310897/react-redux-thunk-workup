@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { initialState, apiStatus, type ReturnType, type EmployeeType, tableData } from "./constants";
+import { initialState, apiStatus, type ReturnType, tableData, type MUL_STATUS } from "./constants";
 import ApiServices from "./apiService";
 
 const fetchData = () => {
@@ -39,6 +39,12 @@ export const userData = createAsyncThunk('userData/data', async () => {
     }
 })
 
+const updateTableData = (index: number, data: any, status: MUL_STATUS) => {
+    tableData[index].result = JSON.stringify(data)
+    tableData[index].status = status === apiStatus.success ? true : false
+    tableData[index].progress_status = status
+}
+
 const dataReducer = createSlice({
     name: 'data',
     initialState: initialState,
@@ -60,34 +66,37 @@ const dataReducer = createSlice({
             .addCase(userData.pending, (state) => {
                 state.status = apiStatus.pending
                 state.data = {}
-                console.log('in pending state...')
+                // updating table data
+                updateTableData(0, {}, apiStatus.pending)
             })
             .addCase(userData.fulfilled, (state, action) => {
                 state.status = apiStatus.success
                 state.data = action?.payload
-                tableData[0].result = JSON.stringify(action?.payload)
-                tableData[0].status = true
-                tableData[0].progress_status = apiStatus?.success
-                console.log("in success state...", action?.payload)
+                // updating table data
+                updateTableData(0, action.payload, apiStatus.success)
             })
             .addCase(userData.rejected, (state) => {
                 state.status = apiStatus.failure
                 state.data = {}
-                console.log("in failure state...")
+                // updating table data
+                updateTableData(0, {}, apiStatus.failure)
             })
             .addCase(employeeList.pending, (state) => {
                 state.employeeListStatus = apiStatus.pending
-                console.log("in pending state...")
+                // updating table data
+                updateTableData(1, {}, apiStatus.pending)
             })
             .addCase(employeeList.fulfilled, (state, action) => {
                 state.employeeListStatus = apiStatus.success
                 state.employeeList = action.payload
-                console.log("in success state...", action?.payload)
+                // updating table data
+                updateTableData(1, action.payload, apiStatus.success)
             })
             .addCase(employeeList.rejected, (state) => {
                 state.employeeListStatus = apiStatus.failure
                 state.employeeList = {}
-                console.log("in failure state...")
+                // updating table data
+                updateTableData(1, {}, apiStatus.failure)
             })
     },
 })

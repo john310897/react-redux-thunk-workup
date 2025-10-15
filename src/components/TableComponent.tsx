@@ -1,7 +1,8 @@
 import React from "react"
 import { statusColors, type TableComponentPropType } from "../constants"
 
-const TableComponent = ({ headers, data, handleOnClick, apiStatus }: TableComponentPropType) => {
+const TableComponent = ({ headers, data, handleOnClick }: TableComponentPropType) => {
+
     return (
         <>
             <table border={1}>
@@ -24,18 +25,20 @@ const TableComponent = ({ headers, data, handleOnClick, apiStatus }: TableCompon
                                             </button>
                                         </td>
                                     ) : headerObj?.key === 'status' ? (
-                                        <td style={{ backgroundColor: (rowData[headerObj?.key] === true ? 'lightgreen' : 'initial') }}>
+                                        <td style={{ backgroundColor: (statusColors[rowData['progress_status']]) }}>
                                             {rowData[headerObj?.key] === true &&
                                                 <>
-
                                                     &#x2713;
                                                 </>
-
                                             }
                                         </td>
                                     ) :
                                         (
-                                            <td>{rowData[headerObj?.key]}</td>
+                                            <td>
+                                                <div>
+                                                    {rowData[headerObj?.key]}
+                                                </div>
+                                            </td>
                                         )}
                                 </React.Fragment>
                             ))}
