@@ -1,5 +1,5 @@
-import React, { useEffect } from "react"
-import { employeeList, userData } from "./reducers"
+import React from "react"
+import { employeeData, employeeList, userData } from "./reducers"
 import './App.css'
 import { useSelector, useDispatch } from "react-redux"
 import { tableData, tableHeader } from "./constants"
@@ -8,42 +8,44 @@ import TableComponent from "./components/TableComponent"
 const App = () => {
 	const dispatch: any = useDispatch();
 	const userStore: any = useSelector(data => data)
-	useEffect(() => {
-		console.log(userStore)
-
-	}, [])
 
 	const handleButtonClick = (actionType: string) => {
 		switch (actionType) {
 			case ('initDispatch'):
-				console.log("in initDispatch###")
+				console.debug("in initDispatch###")
 				checkInitialDispatch()
 				break
 			case ('allEmployeeStatus'):
-				console.log("in checking get all employee status###")
+				console.debug("in checking get all employee status###")
 				checkAllEmployeeListDispatch()
 				break
 			case ('employeeData'):
-				console.log("in getting employee data")
+				console.debug("in getting employee data")
+				checkEmployeeDataDispatch()
 				break
 			default:
-				console.info("no matching action found")
+				console.error("no matching action found")
 				break
 		}
 	}
 
 	const checkInitialDispatch = () => {
-		console.log("in checking initial dispatch status")
+		console.debug("in checking initial dispatch status")
 		dispatch(userData())
 		setTimeout(() => {
-			console.log(userStore)
+			console.debug(userStore)
 		}, 3000)
 
 	}
 
 	const checkAllEmployeeListDispatch = () => {
-		console.log("in dispatch action: getting all employee list")
+		console.debug("in dispatch action: getting all employee list")
 		dispatch(employeeList())
+	}
+
+	const checkEmployeeDataDispatch = () => {
+		console.debug("in dispatch action: get employee data")
+		dispatch(employeeData())
 	}
 
 	return (

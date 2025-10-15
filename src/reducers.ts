@@ -16,13 +16,19 @@ const fetchData = () => {
     })
 }
 
-const fetchEmployeeList = () => {
-    return ApiServices.getEmployeeList()
-}
-
 export const employeeList = createAsyncThunk('employeeList/data', async () => {
     try {
-        const response = await fetchEmployeeList()
+        const response = await ApiServices.getEmployeeList()
+        return response
+    }
+    catch (err) {
+        throw err
+    }
+})
+
+export const employeeData = createAsyncThunk('employee/data', async () => {
+    try {
+        const response = await ApiServices.getEmployee(1)
         return response
     }
     catch (err) {
@@ -97,6 +103,24 @@ const dataReducer = createSlice({
                 state.employeeList = {}
                 // updating table data
                 updateTableData(1, {}, apiStatus.failure)
+            })
+            .addCase(employeeData.pending, (state) => {
+                state.employeeDataStatus = apiStatus.pending
+                state.employeeData = {}
+                // updating table data
+                updateTableData(2, {}, apiStatus.pending)
+            })
+            .addCase(employeeData.fulfilled, (state, action) => {
+                state.employeeData = action.payload;
+                state.employeeDataStatus = apiStatus.success
+                // updating table data
+                updateTableData(2, action?.payload, apiStatus.success)
+            })
+            .addCase(employeeData.rejected, (state) => {
+                state.employeeData = {};
+                state.employeeDataStatus = apiStatus.failure;
+                // updating table data
+                updateTableData(2, {}, apiStatus.failure)
             })
     },
 })
