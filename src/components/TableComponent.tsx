@@ -32,18 +32,26 @@ const TableComponent = ({ headers, data, handleOnClick }: TableComponentPropType
                                     ) : headerObj?.key === 'status' ? (
                                         <td {...tableCellBackground(rowData, headerObj)}>
                                             <>
-                                                {console.log(rowData?.progress_status)}
                                                 {UNICODE_SYMBOLS[rowData?.progress_status]}
                                             </>
 
                                         </td>
                                     ) :
                                         (
-                                            <td {...tableCellBackground(rowData, headerObj)}>
-                                                <div>
-                                                    {rowData[headerObj?.key]}
-                                                </div>
-                                            </td>
+                                            headerObj?.key === 'result' ? (
+                                                <td {...tableCellBackground(rowData, headerObj)}>
+                                                    <div className="table_data_content">
+                                                        {rowData[headerObj?.key]}
+                                                    </div>
+                                                </td>
+                                            ) : (
+                                                <td {...tableCellBackground(rowData, headerObj)}>
+                                                    <div>
+                                                        {rowData[headerObj?.key]}
+                                                    </div>
+                                                </td>
+                                            )
+
                                         )}
                                 </React.Fragment>
                             ))}

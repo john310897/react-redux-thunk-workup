@@ -88,37 +88,38 @@ const dataReducer = createSlice({
                 updateTableData(0, {}, apiStatus.failure)
             })
             .addCase(employeeList.pending, (state) => {
-                state.employeeListStatus = apiStatus.pending
+                state.status = apiStatus.pending
+                state.data = {}
                 // updating table data
                 updateTableData(1, {}, apiStatus.pending)
             })
             .addCase(employeeList.fulfilled, (state, action) => {
-                state.employeeListStatus = apiStatus.success
-                state.employeeList = action.payload
+                state.status = apiStatus.success
+                state.data = action.payload
                 // updating table data
                 updateTableData(1, action.payload, apiStatus.success)
             })
             .addCase(employeeList.rejected, (state) => {
-                state.employeeListStatus = apiStatus.failure
-                state.employeeList = {}
+                state.status = apiStatus.failure
+                state.data = {}
                 // updating table data
                 updateTableData(1, {}, apiStatus.failure)
             })
             .addCase(employeeData.pending, (state) => {
-                state.employeeDataStatus = apiStatus.pending
-                state.employeeData = {}
+                state.status = apiStatus.pending
+                state.data = {}
                 // updating table data
                 updateTableData(2, {}, apiStatus.pending)
             })
             .addCase(employeeData.fulfilled, (state, action) => {
-                state.employeeData = action.payload;
-                state.employeeDataStatus = apiStatus.success
+                state.data = action.payload;
+                state.status = apiStatus.success
                 // updating table data
                 updateTableData(2, action?.payload, apiStatus.success)
             })
             .addCase(employeeData.rejected, (state) => {
-                state.employeeData = {};
-                state.employeeDataStatus = apiStatus.failure;
+                state.data = {};
+                state.status = apiStatus.failure;
                 // updating table data
                 updateTableData(2, {}, apiStatus.failure)
             })

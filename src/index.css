@@ -74,7 +74,7 @@ button:focus-visible {
 
 .main_container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-around;
   align-items: center;
   width: 70vh;
@@ -112,6 +112,7 @@ table {
   border-collapse: collapse;
   width: 100%;
   font-family: Arial, Helvetica, sans-serif;
+  table-layout: fixed;
 }
 
 tr:nth-child(even) {
@@ -124,8 +125,15 @@ td {
   border: 1px solid;
 }
 
-td div {
+
+.table_data_content {
+  width: 100%;
   max-height: 20vh;
-  max-width: 483px;
   overflow: auto;
+}
+
+.output {
+  width: 90%;
+  height: 30vh;
+  white-space: wrap;
 }

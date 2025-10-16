@@ -1,14 +1,17 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { employeeData, employeeList, userData } from "./reducers"
 import './App.css'
 import { useSelector, useDispatch } from "react-redux"
 import { tableData, tableHeader } from "./constants"
 import TableComponent from "./components/TableComponent"
+import OutputComponent from "./components/OutputComponent"
 
 const App = () => {
 	const dispatch: any = useDispatch();
 	const userStore: any = useSelector(data => data)
-
+	useEffect(() => {
+		console.log(userStore)
+	}, [])
 	const handleButtonClick = (actionType: string) => {
 		switch (actionType) {
 			case ('initDispatch'):
@@ -56,6 +59,10 @@ const App = () => {
 					data={tableData}
 					handleOnClick={(key) => handleButtonClick(key)}
 					apiStatus={userStore?.data?.status}
+				/>
+				<hr />
+				<OutputComponent
+					output={JSON.stringify(userStore?.data?.data)}
 				/>
 			</div>
 		</React.Fragment>

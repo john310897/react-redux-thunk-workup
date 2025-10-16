@@ -22,11 +22,7 @@ type ApiStatus = {
 
 type StateType = {
     data: any,
-    status: MUL_STATUS,
-    employeeList?: any,
-    employeeListStatus?: MUL_STATUS,
-    employeeData?: any,
-    employeeDataStatus?: MUL_STATUS
+    status: MUL_STATUS
 }
 
 export type ReturnType = {
@@ -51,6 +47,9 @@ export type TableComponentPropType = {
     handleOnClick: (key: string) => void
 }
 
+export type OutputComponentPropType = {
+    output: any
+}
 
 export const UNICODE_SYMBOLS: any = {
     IDLE: '',
@@ -102,9 +101,5 @@ export const tableData = [
 
 export const initialState: StateType = {
     data: {},
-    status: apiStatus.idle,
-    employeeList: {},
-    employeeListStatus: apiStatus.idle,
-    employeeData: {},
-    employeeDataStatus: apiStatus.idle
+    status: apiStatus.idle
 }
